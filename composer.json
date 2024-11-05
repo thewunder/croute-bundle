@@ -1,0 +1,17 @@
+{
+  "name": "thewunder/croute-bundle",
+  "description": "Symfony Bundle for the Croute Router",
+  "keywords": ["Routing", "Symfony Bundle"],
+  "autoload": {
+    "psr-4": {
+      "Croute\\CrouteBundle\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=8.1",
+    "thewunder/croute": "^3.0",
+    "symfony/config": "^6.1|^7.0",
+    "symfony/http-kernel": "^6.1|^7.0",
+    "symfony/dependency-injection": "^6.1|^7.0"
+  }
+}
