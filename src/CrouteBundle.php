@@ -4,6 +4,7 @@ namespace Croute\CrouteBundle;
 
 use Croute\Attributes\HttpMethodHandler;
 use Croute\Attributes\SecureHandler;
+use Croute\ControllerInterface;
 use Croute\Router;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,6 +34,9 @@ final class CrouteBundle extends AbstractBundle
         $routerConfig = $container->services()->set('croute.router', Router::class);
         $routerConfig->factory([Router::class, 'create'])
             ->args([service('event_dispatcher'), $config['namespaces'], service('service_container')]);
+
+        $builder->registerForAutoconfiguration(ControllerInterface::class)
+            ->addTag('controller.service_arguments');
 
         foreach ($config['attribute_handlers'] as $handler) {
             $routerConfig->call('addAttributeHandler', [service($handler)]);
