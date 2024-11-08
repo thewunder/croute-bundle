@@ -18,12 +18,12 @@ final class CrouteBundle extends AbstractBundle
     {
         $definition->rootNode()->children()
             ->arrayNode('namespaces')
-                ->prototype('scalar')->isRequired()->cannotBeEmpty()->end()
+            ->prototype('scalar')->isRequired()->cannotBeEmpty()->end()
             ->end()
             ->arrayNode('attribute_handlers')
-                ->prototype('scalar')->defaultValue(['croute.http_method_handler', 'croute.secure_handler'])->end()
+            ->prototype('scalar')->defaultValue(['croute.http_method_handler', 'croute.secure_handler'])->end()
             ->end()
-        ->end();
+            ->end();
     }
 
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
@@ -43,7 +43,7 @@ final class CrouteBundle extends AbstractBundle
         }
 
         $container->services()->set('croute.kernel', CrouteKernel::class)
-            ->args([service('croute.router')])
+            ->args([service('croute.router'), service('request_stack'), service('session.factory')])
             ->public();
     }
 }
